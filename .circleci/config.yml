@@ -46,21 +46,11 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * *"
-          filters:
-            # branches:
-              # only:
-                # - master
-                # - beta
-            tags:
-              only:
-                - stable-latest
     jobs:
       - mvn_deploy:
           context: cicd-infra
-          # filters:
-            # branches:
-              # only:
-                # - master
-            # tags:
-              # only:
-                # - stable-latest
+          filters:
+            tags:
+              only: /^stable-latest/
+            branches:
+              ignore: /.*/
