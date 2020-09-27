@@ -13,6 +13,7 @@ jobs:
       JFROG_BUILD_NUMBER: 1524548
       DESIRED_MAVEN_VERSION: 3.6.3
       GUARDIAN_GIT_URI: "https://github.com/gravitee-lab/gravitee-gateway"
+      GUARDIAN_VERSION: 3.1.4
     steps:
       - checkout
       - secrethub/install
@@ -21,12 +22,14 @@ jobs:
           command: |
                     mkdir -p $PWD/guard-shift
                     git clone "${GUARDIAN_GIT_URI}" $PWD/guard-shift
+                    cd "$PWD/guard-shift"
+                    git checkout "${GUARDIAN_VERSION}"
       - run:
           name: "Maven clean install the Guardian maven project"
           command: |
                     echo "Run Maven Tests"
                     export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
-                    export MAVEN_COMMAND="mvn clean install"
+                    export MAVEN_COMMAND="mvn clean install -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
 
@@ -41,7 +44,7 @@ jobs:
                     export JFROG_SECRET=$(secrethub read gravitee-lab/cicd-infra/dev/jfrog/password)
                     echo "JFROG_USERNAME=[${JFROG_USERNAME}]"
                     # echo "JFROG_SECRET=[${JFROG_SECRET}]"
-                    export MAVEN_COMMAND="mvn deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER}"
+                    export MAVEN_COMMAND="mvn deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER} -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
 
