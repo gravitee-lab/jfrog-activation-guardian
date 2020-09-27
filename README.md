@@ -75,6 +75,13 @@ echo "JFROG_SECRET_STAGING=[${JFROG_SECRET_STAGING}]"
 
 
 ```
+* creating secrethub service account with permissions to access secrets in `gravitee-lab/cicd-infra` repo :
+
+```bash
+export NAME_OF_REPO_IN_ORG="gravitee-lab/cicd-infra"
+secrethub service init "${NAME_OF_REPO_IN_ORG}" --description "Circle CI Service for Gravitee CI CD Orchestrator" --permission read | tee ./.the-created.service.token
+```
+* Then created a Circle CI Org context `cicd-infra`, and in that context, the `SECRETHUB_CREDENTIAL` env. var. with value, the token in output of the `service init` command
 
 ## Packaging and deployment to JFrog
 

@@ -22,7 +22,7 @@ jobs:
           command: |
                     echo "Run Maven Tests"
                     export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
-                    export MAVEN_COMMAND="mvn clean install -DskipTests"
+                    export MAVEN_COMMAND="mvn -T 4 clean install -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
 
@@ -38,7 +38,7 @@ jobs:
                     export JFROG_SECRET=$(secrethub read gravitee-lab/cicd-infra/dev/jfrog/password)
                     echo "JFROG_USERNAME=[${JFROG_USERNAME}]"
                     # echo "JFROG_SECRET=[${JFROG_SECRET}]"
-                    export MAVEN_COMMAND="mvn -X deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER} -DskipTests"
+                    export MAVEN_COMMAND="mvn -T 4 deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER} -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run --name mvndeploy -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
                     docker logs -f mvndeploy
@@ -58,7 +58,7 @@ workflows:
                 # - stable-latest
     jobs:
       - mvn_deploy:
-          context: cicd-orchestrator
+          context: cicd-infra
           filters:
             branches:
               only:
