@@ -23,6 +23,14 @@ jobs:
                     mkdir -p $PWD/guard-shift
                     git clone "${GUARDIAN_GIT_URI}" $PWD/guard-shift
                     cd "$PWD/guard-shift"
+                    echo "DEBUG PIPELINE - git remote -v"
+                    git remote -v
+                    echo "DEBUG PIPELINE - git branch -a"
+                    git branch -a
+                    echo "DEBUG PIPELINE - git tag -ln | grep -E '^3.1.*'"
+                    git branch -a
+                    echo "DEBUG PIPELINE - GUARDIAN_GIT_URI=[${GUARDIAN_GIT_URI}]"
+                    echo "DEBUG PIPELINE - GUARDIAN_VERSION=[${GUARDIAN_VERSION}]"
                     git checkout "${GUARDIAN_VERSION}"
       - run:
           name: "Maven clean install the Guardian maven project"
