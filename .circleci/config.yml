@@ -13,7 +13,7 @@ jobs:
       JFROG_BUILD_NUMBER: 1524548
       DESIRED_MAVEN_VERSION: 3.6.3
       GUARDIAN_GIT_URI: "https://github.com/gravitee-lab/gravitee-gateway"
-      GUARDIAN_VERSION: 3.1.4
+      GUARDIAN_VERSION: 3.1.1
     steps:
       - checkout
       - secrethub/install
