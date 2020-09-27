@@ -25,7 +25,7 @@ jobs:
           name: "Maven clean install the Guardian maven project"
           command: |
                     echo "Run Maven Tests"
-                    export MVN_DOCKER="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
+                    export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
                     export MAVEN_COMMAND="mvn clean install"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
