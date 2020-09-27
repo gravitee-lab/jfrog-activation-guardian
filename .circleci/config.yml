@@ -30,7 +30,7 @@ jobs:
           name: "Maven Deploy the Gravitee Component to Central Maven Repo : JFrog"
           command: |
                     echo "Run Maven Deploy using JFrog Maven Plugin"
-                    export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-15 "
+                    export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
                     #
                     # see https://github.com/jfrog/project-examples/tree/master/artifactory-maven-plugin-example
                     export JFROG_USERNAME=$(secrethub read gravitee-lab/cicd-infra/dev/jfrog/username)
