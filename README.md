@@ -174,3 +174,7 @@ The example described in this section configures the Artifactory publisher to de
     </plugins>
 </build>
 ```
+
+When maven deploy successfully uploaded the maven artifacts to artifactory, we can see them in the artifactory Web UI :
+
+![success mvn deploy artifacts in Artifactory Web UI](./doc/images/MVN_DEPLOY_SUCCESS_ARTIFACTORY_2020-09-27T19-10-22.862Z.png)
