@@ -25,8 +25,6 @@ jobs:
                     cd "$PWD/guard-shift"
                     echo "DEBUG PIPELINE - git remote -v"
                     bash -c "git remote -v"
-                    echo "DEBUG PIPELINE - git branch -a"
-                    bash -c "git branch -a"
                     echo "DEBUG PIPELINE - git tag -ln | grep -E '^3.1.*'"
                     bash -c "git tag -ln | grep -E '^3.1.*'"
                     echo "DEBUG PIPELINE - GUARDIAN_GIT_URI=[${GUARDIAN_GIT_URI}]"
