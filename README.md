@@ -125,3 +125,45 @@ echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
 docker run -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
 
 ```
+
+
+# JFrog deploy plugin
+
+
+The example described in this section configures the Artifactory publisher to deploy build artifacts either to the `releases` or the `snapshots` repository of the  https://gravitee.jfrog.io <!-- public OSS --> instance of Artifactory when `mvn deploy` is executed.
+
+```Xml
+<build>
+    <plugins>
+        ...
+        <plugin>
+            <groupId>org.jfrog.buildinfo</groupId>
+            <artifactId>artifactory-maven-plugin</artifactId>
+            <version>2.7.0</version>
+            <inherited>false</inherited>
+            <executions>
+                <execution>
+                    <id>build-info</id>
+                    <goals>
+                        <goal>publish</goal>
+                    </goals>
+                    <configuration>
+                        <deployProperties>
+                            <gradle>awesome</gradle>
+                            <review.team>devops</review.team>
+                        </deployProperties>
+                        <publisher>
+                            <!--<contextUrl>https://oss.jfrog.org</contextUrl>-->
+                            <contextUrl>https://gravitee.jfrog.io</contextUrl>
+                            <username>someUsername</username>
+                            <password>somePassword</password>
+                            <repoKey>libs-release-local</repoKey>
+                            <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
+                        </publisher>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
