@@ -62,7 +62,7 @@
                       </artifactory>
                       <publisher>
                           <!--<contextUrl>http://localhost:8081/artifactory</contextUrl>-->
-                          <contextUrl>https://gravitee.jfrog.io</contextUrl>
+                          <contextUrl>https://gravitee.jfrog.io/artifactory</contextUrl>
                           <username>${username}</username>
                           <password>${password}</password>
                           <excludePatterns>*-tests.jar</excludePatterns>
