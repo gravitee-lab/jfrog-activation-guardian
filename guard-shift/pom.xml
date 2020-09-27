@@ -38,7 +38,7 @@
     </dependencies>
 
 	</dependencyManagement>
-
+<build>
   <plugins>
       <plugin>
           <groupId>org.jfrog.buildinfo</groupId>
@@ -104,5 +104,5 @@
           </configuration>
       </plugin>
   </plugins>
-
+</build>
 </project>
