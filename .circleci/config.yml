@@ -20,7 +20,6 @@ jobs:
       - run:
           name: "Maven clean install the Guardian maven project"
           command: |
-                    echo "Run Maven Tests"
                     export MVN_DOCKER_IMAGE="maven:${DESIRED_MAVEN_VERSION}-openjdk-16 "
                     export MAVEN_COMMAND="mvn -T 4 clean install -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
@@ -41,28 +40,27 @@ jobs:
                     export MAVEN_COMMAND="mvn -T 4 deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER} -DskipTests"
                     echo "MAVEN_COMMAND=[${MAVEN_COMMAND}]"
                     docker run --name mvndeploy -it --rm -v "$PWD/guard-shift":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -w /usr/src/mymaven ${MVN_DOCKER_IMAGE} ${MAVEN_COMMAND}
-                    docker logs -f mvndeploy
 workflows:
   version: 2.1
   weekly_guard_shift:
-    # triggers:
-      # - schedule:
-          # cron: "0 0 * * *"
-          # filters:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
             # branches:
               # only:
                 # - master
                 # - beta
-            # tags:
-              # only:
-                # - stable-latest
-    jobs:
-      - mvn_deploy:
-          context: cicd-infra
-          filters:
-            branches:
-              only:
-                - master
             tags:
               only:
                 - stable-latest
+    jobs:
+      - mvn_deploy:
+          context: cicd-infra
+          # filters:
+            # branches:
+              # only:
+                # - master
+            # tags:
+              # only:
+                # - stable-latest
