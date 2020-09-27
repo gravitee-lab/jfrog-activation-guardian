@@ -1,8 +1,11 @@
+# maven-modules-example
+An example of a Maven multi module project
+
 # Maven Artifactory Plugin
 
 ## Overview
 
-This example is using the Maven Artifactory Plugin for artifacts and build-info deployment to Artifactory. 
+This example is using the Maven Artifactory Plugin for artifacts and build-info deployment to Artifactory.
 
 ## Running this example
 
@@ -11,7 +14,7 @@ To run this example, please do the following:
 For more configuration information see the [Maven Artifactory Plugin documentation](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin).
 * CD to the project directory and run *mvn deploy*.
 
-You can define the Artifactory details inside the pom file using properties. These properties can be sent to maven as system properties: 
+You can define the Artifactory details inside the pom file using properties. These properties can be sent to maven as system properties:
 ```console
 mvn deploy -Dusername=admin -Dpassword=password -Dbuildnumber=1
 ```
