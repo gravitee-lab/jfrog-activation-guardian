@@ -60,7 +60,7 @@ workflows:
               # only:
                 # - stable-latest
     jobs:
-      - mvn_deploy
+      - mvn_deploy:
           context: cicd-orchestrator
           filters:
             branches:
