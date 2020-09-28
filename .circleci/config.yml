@@ -35,6 +35,7 @@ jobs:
                     secrethub read gravitee-lab/cicd-infra/dev/jfrog/username
                     export JFROG_USERNAME=$(secrethub read gravitee-lab/cicd-infra/dev/jfrog/username)
                     export JFROG_SECRET=$(secrethub read gravitee-lab/cicd-infra/dev/jfrog/password)
+                    export JFROG_BUILD_NUMBER=${CIRCLE_SHA1}
                     echo "JFROG_USERNAME=[${JFROG_USERNAME}]"
                     # echo "JFROG_SECRET=[${JFROG_SECRET}]"
                     export MAVEN_COMMAND="mvn -T 4 deploy -Dusername=${JFROG_USERNAME} -Dpassword=${JFROG_SECRET} -Dbuildnumber=${JFROG_BUILD_NUMBER} -DskipTests"
