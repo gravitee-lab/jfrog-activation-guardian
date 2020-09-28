@@ -46,10 +46,13 @@ workflows:
   weekly_guard_shift:
     triggers:
       - schedule:
+          # Every sunday at midnight UTC
           # cron: "0 0 * * *"
           # not supported by Circle CI
-          cron: "*/5 * * * *"
+          # cron: "*/5 * * * *"
           # cron: '* * * * *'
+          # Every hour UTC
+          cron: "0 * * * *"
           filters:
             branches:
               only:
