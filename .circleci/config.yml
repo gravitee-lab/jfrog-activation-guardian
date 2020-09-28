@@ -45,7 +45,9 @@ workflows:
   weekly_guard_shift:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          # cron: "0 0 * * *"
+          # cron: "*/5 * * * *" # not supported by Circle CI
+          cron: '* * * * *'
           filters:
             branches:
               only:
@@ -53,8 +55,8 @@ workflows:
     jobs:
       - mvn_deploy:
           context: cicd-infra
-          filters:
-            tags:
-              only: /^stable-latest/
-            branches:
-              ignore: /.*/
+          # filters:
+            # tags:
+              # only: /^stable-latest/
+            # branches:
+              # ignore: /.*/
