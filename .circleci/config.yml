@@ -46,6 +46,7 @@ workflows:
     triggers:
       - schedule:
           # cron: "0 0 * * *"
+          # cron: "*/5 * * * *" # not supported by Circle CI
           cron: '* * * * *'
           filters:
             branches:
