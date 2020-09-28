@@ -14,6 +14,19 @@ I want the Pipeline to run once a week, On sunday at midnight :
 0 0 * * 0
 ```
 
+* test config every 5 minutes: ( `*/5` _cron step syntax_ not supported by Circle CI )
+
+```ini
+*/5 * * * *
+```
+
+* test config every minute :
+
+```ini
+* * * * *
+```
+
+
 ## Secrets Initialization
 
 ```bash
