@@ -14,6 +14,12 @@ I want the Pipeline to run once a week, On sunday at midnight :
 0 0 * * 0
 ```
 
+* test config every 5 minutes:
+
+```ini
+*/5 * * * *
+```
+
 ## Secrets Initialization
 
 ```bash
